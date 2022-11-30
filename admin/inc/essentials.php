@@ -108,7 +108,7 @@
     }
 
     function uploadUserImage($image){
-        $valid_mine = ['image/jpeg', 'image/png','image/webp', 'image/jpg'];
+        $valid_mine = ['image/jpeg', 'image/png','image/webp'];
         $img_mine = $image['type'];
 
         if(!in_array($img_mine, $valid_mine)){

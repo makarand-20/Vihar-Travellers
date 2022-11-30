@@ -1,29 +1,31 @@
 <?php
 require('../admin/inc/db_config.php');
 require('../admin/inc/essentials.php');
-require("../include/sendgrid/sendgrid-php.php/sendgrid-php.php");
+require("../include/sendgrid/sendgrid-php.php");
 
-function send_mail($email, $name, $token){
+function send_mail($uemail, $name, $token){
     $email = new \SendGrid\Mail\Mail(); 
-    $email->setFrom("makarandkhiste123@gmail.com", "MkTravels");
+    $email->setFrom("makarandkhiste123@gmail.com", "Traveling Hub");
     $email->setSubject("Account Verification Link");
-    $email->addTo($email, $name);
+
+    $email->addTo($uemail, $name);
     
     $email->addContent(
         "text/html",
         "
             Click to confirm your email : <br>
-            <a href = '".SITE_URL."email_confirm.php?email=$email&token=$token"."'>
+            <a href = '".SITE_URL."email_confirm.php?email=$uemail&token=$token"."'>
                 CLICK ME
             </a>
         "
     );
     
     $sendgrid = new \SendGrid(SENDGRID_API_KEY);
-    if($sendgrid->send($email)){
+    try{
+        $sendgrid->send($email);
         return 1; 
     }
-    else{
+    catch(Exception $e){
         return 0;
     }
 }
@@ -62,7 +64,7 @@ if(isset($_POST['register'])){
     //send confirmation link to the user
     $token = bin2hex(random_bytes(16));
     if(!send_mail($data['email'], $data['name'],$token)){
-        echo 'mail failed!';
+        echo 'mail_failed';
         exit;
     }
 

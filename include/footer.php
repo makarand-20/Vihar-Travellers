@@ -115,7 +115,31 @@ $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
         xhr.open("POST", "ajax/login_register.php", true);
 
         xhr.onload = function() {
-            
+            if(this.responseText == 'Pass_mismatched'){
+                alert('Password Mismatched!');
+            }
+            else if(this.responseText == 'email_already'){
+                alert('Email is already registred...');
+            }
+            else if(this.responseText == 'phone_already'){
+                alert('Phone Number is already registred...');
+            }
+            else if(this.responseText == 'inv_img'){
+                alert('Only JPEG, PNG, WEBP images are allowed!');
+            }
+            else if(this.responseText == 'upd_failed'){
+                alert('Image Upload Failed!');
+            }
+            else if(this.responseText == 'mail_failed'){
+                alert('Unable to send confirmation mail, Server Down!');
+            }
+            else if(this.responseText == 'ins_failed'){
+                alert('Insertion of data failed');
+            }
+            else{
+                alert('Sucess... Link is send to mail');
+                register_form.reset();
+            }
         }
         xhr.send(data);
 

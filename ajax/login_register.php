@@ -11,17 +11,20 @@ function send_mail($email, $name, $token){
     
     $email->addContent(
         "text/html",
-        "<strong>and easy to do anywhere, even with PHP</strong>"
+        "
+            Click to confirm your email : <br>
+            <a href = '".SITE_URL."email_confirm.php?email=$email&token=$token"."'>
+                CLICK ME
+            </a>
+        "
     );
     
-    $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-    try {
-        $response = $sendgrid->send($email);
-        print $response->statusCode() . "\n";
-        print_r($response->headers());
-        print $response->body() . "\n";
-    } catch (Exception $e) {
-        echo 'Caught exception: '. $e->getMessage() ."\n";
+    $sendgrid = new \SendGrid(SENDGRID_API_KEY);
+    if($sendgrid->send($email)){
+        return 1; 
+    }
+    else{
+        return 0;
     }
 }
 
@@ -58,9 +61,22 @@ if(isset($_POST['register'])){
 
     //send confirmation link to the user
     $token = bin2hex(random_bytes(16));
-    send_mail($data['email'], $data['name'],$token);
+    if(!send_mail($data['email'], $data['name'],$token)){
+        echo 'mail failed!';
+        exit;
+    }
 
+    $enc_pass = password_hash($data['pass'], PASSWORD_BCRYPT);
+
+    $q = "INSERT INTO `user_cred`(`name`, `email`, `phonenum`, `address`, `pincode`, `dob`, `pass`, `profile`, `token`) VALUES (?,?,?,?,?,?,?,?,?)";
+
+    $values = [$data['name'],$data['email'],$data['phonenum'],$data['address'],$data['pincode'],$data['dob'], $img, $enc_pass, $token];
+
+    if(insert($q, $values, 'ssssissss')){
+        echo 1;
+    }
+    else{
+        echo 'ins_failed';
+    }
 }
-
-
 ?>

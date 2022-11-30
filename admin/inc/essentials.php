@@ -17,6 +17,9 @@
     define('TOURS_FOLDER', 'tours/');
     define('USERS_FOLDER', 'users/');
 
+    //sendgrid api key
+    define('SENDGRID_API_KEY',"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");
+
     function adminLogin(){
         session_start();
         if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']== true)){

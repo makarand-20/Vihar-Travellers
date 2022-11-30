@@ -14,7 +14,7 @@ function send_mail($uemail, $name, $token){
         "text/html",
         "
             Click to confirm your email : <br>
-            <a href = '".SITE_URL."email_confirm.php?email=$uemail&token=$token"."'>
+            <a href = '".SITE_URL."email_confirm.php?email_confirmation&email=$uemail&token=$token"."'>
                 CLICK ME
             </a>
         "

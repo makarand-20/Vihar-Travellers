@@ -46,7 +46,7 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav mr-auto py-0">
                 <a href="index.php" class="nav-item nav-link">Home</a>
-                <a href="shop.php" class="nav-item nav-link">Shop</a>
+                <a href="shop.php" class="nav-item nav-link">Tours</a>
                 <a href="checkout.php" class="nav-item nav-link">Checkout</a>
                 <a href="contact.php" class="nav-item nav-link">Contact</a>
                 <a href="admin/index.php" class="nav-item nav-link">Admin</a>

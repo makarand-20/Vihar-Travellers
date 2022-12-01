@@ -7,6 +7,7 @@
     define('EXTRA_CAROUSEL_IMG_PATH', SITE_URL.'img/extra_carousel/');
     define('FACILITIES_IMG_PATH', SITE_URL.'img/facilities/');
     define('TOURS_IMG_PATH', SITE_URL.'img/tours/');
+    define('USERS_IMG_PATH', SITE_URL.'img/users/');
 
     // backend upload purpose data
     define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'].'/Travel_ui/img/');
@@ -19,6 +20,8 @@
 
     //sendgrid api key
     define('SENDGRID_API_KEY',"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");
+    define('SENDGRID_EMAIL',"makarandkhiste123@gmail.com");
+    define('SENDGRID_TITLE_NAME',"Traveling Hub");
 
     function adminLogin(){
         session_start();

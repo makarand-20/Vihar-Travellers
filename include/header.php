@@ -1,4 +1,6 @@
    <?php
+    session_start();
+
     require('admin/inc/db_config.php');
     require('admin/inc/essentials.php');
 
@@ -9,6 +11,8 @@
     $contact_m = "SELECT * FROM `settings` WHERE `sr_no`=?";
     $values = [1];
     $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
+
+
 
     ?>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -52,8 +56,32 @@
                 <a href="admin/index.php" class="nav-item nav-link">Admin</a>
             </div>
             <div class="py-0">
-                <button class="bg-white text-dark rounded shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>&emsp;
-                <button class="bg-white text-dark rounded shadow-sm" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+
+                <?php
+                    if(isset($_SESSION['login']) && $_SESSION['login']==true){
+                        $path = USERS_IMG_PATH;
+                        echo<<<data
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-light btn-outline-dark rounded shadow-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                <img src="$path$_SESSION[uPic]" style="width: 25px; height="25px;" class="me-1"></img>
+                                $_SESSION[uName]
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                                <li><a class="dropdown-item" href="bookings.php">Bookings</a></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                </ul>
+                            </div>
+                        data;
+                    }
+                    else{
+                        echo<<<data
+                            <button class="bg-white text-dark rounded shadow-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>&emsp;
+                            <button class="bg-white text-dark rounded shadow-sm" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                        data;
+                    }
+                ?>
+
             </div>
         </div>
     </nav>
@@ -126,19 +154,19 @@
     <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form id="login-form">
                     <div class="modal-header d-flex justif-content-between">
                         <h5>User Login</h5>
                         <button type="reset" class="btn bg-white text-dark align-middle shadow-none p-0 m-0" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-power"></i></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label class="form-label">Email address</label>
-                            <input type="email" class="form-control shadow-none" required>
+                            <label class="form-label">Email / Mobile</label>
+                            <input type="text" name="email_mob" class="form-control shadow-none" required>
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control shadow-none" required>
+                            <input type="password" name="pass" class="form-control shadow-none" required>
                         </div>
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <button type="submit" class="btn btn-dark shadow-none">Login</button>

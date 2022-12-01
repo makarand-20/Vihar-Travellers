@@ -144,4 +144,42 @@ $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
         xhr.send(data);
 
     });
+
+    let login_form = document.getElementById('login-form');
+    login_form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let data = new FormData();
+        
+        data.append('email_mob', login_form.elements['email_mob'].value);
+        data.append('pass', login_form.elements['pass'].value);
+        data.append('login', '');
+
+        var myModal = document.getElementById('loginModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/login_register.php", true);
+
+        xhr.onload = function() {
+            if(this.responseText == 'inv_email_mob'){
+                alert('Invalid Email / Mobile');
+            }
+            else if(this.responseText == 'not_verified'){
+                alert('Email is not verified yet...');
+            }
+            else if(this.responseText == 'inactive'){
+                alert('Your Account Is Suspended, Please Contact Admin');
+            }
+            else if(this.responseText == 'invalid_pass'){
+                alert('Invalid Password!');
+            }
+            else{
+                window.location = window.location.pathname;
+            }
+        }
+        xhr.send(data);
+
+    });
 </script>

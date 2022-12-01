@@ -72,7 +72,7 @@ if(isset($_POST['register'])){
 
     $q = "INSERT INTO `user_cred`(`name`, `email`, `phonenum`, `address`, `pincode`, `dob`, `pass`, `profile`, `token`) VALUES (?,?,?,?,?,?,?,?,?)";
 
-    $values = [$data['name'],$data['email'],$data['phonenum'],$data['address'],$data['pincode'],$data['dob'], $img, $enc_pass, $token];
+    $values = [$data['name'],$data['email'],$data['phonenum'],$data['address'],$data['pincode'],$data['dob'], $enc_pass, $img , $token];
 
     if(insert($q, $values, 'ssssissss')){
         echo 1;

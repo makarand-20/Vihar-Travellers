@@ -194,7 +194,7 @@
                            <input type="email" name="email" class="form-control shadow-none" required>
                        </div>
                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <button type="submit" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#forgotModal">Send Link</button>  
+                            <button type="submit" class="btn btn-dark shadow-none">Send Link</button>  
                         </div>
                    </div>
                </form>

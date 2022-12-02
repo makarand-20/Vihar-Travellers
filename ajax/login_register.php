@@ -2,32 +2,50 @@
 require('../admin/inc/db_config.php');
 require('../admin/inc/essentials.php');
 require("../include/sendgrid/sendgrid-php.php");
+
 date_default_timezone_set("Asia/Kolkata");
 
-function send_mail($uemail, $token, $type){
-
-    if($type = "email_confirmation"){
-        $page = 'email_confirm.php';
-        $subject = 'Account Verification Link';
-        $content = 'Click the link to confirm your email : ';
-    }
-    else{
-        $page = 'index.php';
-        $subject = 'Account Reset Link';
-        $content = 'Reset Your Account';
-    }
-
+function send_mail($uemail, $token){
+    
     $email = new \SendGrid\Mail\Mail(); 
     $email->setFrom(SENDGRID_EMAIL, SENDGRID_TITLE_NAME);
-    $email->setSubject($subject);
+    $email->setSubject("Account Verification Link");
 
-    $email->addTo($uemail,);
+    $email->addTo($uemail);
     
     $email->addContent(
         "text/html",
         "
-            $content<br>
-            <a href = '".SITE_URL."$page?$type&email=$uemail&token=$token"."'>
+            Click the link to verify Your Account<br>
+            <a href = '".SITE_URL."email_confirm.php?email_confirmation&email=$uemail&token=$token"."'>
+                CLICK ME
+            </a>
+        "
+    );
+    
+    $sendgrid = new \SendGrid(SENDGRID_API_KEY);
+    try{
+        $sendgrid->send($email);
+        return 1; 
+    }
+    catch(Exception $e){
+        return 0;
+    }
+}
+
+function send_for_mail($uemail, $token){
+
+    $email = new \SendGrid\Mail\Mail(); 
+    $email->setFrom(SENDGRID_EMAIL, SENDGRID_TITLE_NAME);
+    $email->setSubject("Account Reset Link");
+
+    $email->addTo($uemail);
+    
+    $email->addContent(
+        "text/html",
+        "
+            Click the link reset Your Account<br>
+            <a href = '".SITE_URL."index.php?account_recovery&email=$uemail&token=$token"."'>
                 CLICK ME
             </a>
         "
@@ -76,7 +94,8 @@ if(isset($_POST['register'])){
 
     //send confirmation link to the user
     $token = bin2hex(random_bytes(16));
-    if(!send_mail($data['email'],$token, "email_confirmation")){
+
+    if(!send_mail($data['email'], $token)){
         echo 'mail_failed';
         exit;
     }
@@ -153,12 +172,9 @@ if(isset($_POST['forgot_pass'])){
         }
         else{
             $token = bin2hex(random_bytes(16));
-            if(!send_mail($data['email'], $token, 'account_recovery')){
-                echo 'mail_failed';
-            }
-            else{
+            if(send_for_mail($data['email'], $token)){
                 $date = date("Y-m-d");
-                $query = mysqli_query($con, "UPDATE `user_cred` SET `token`='$token',`t_expire`='$date',WHERE `id`='$u_fetch[id]'");
+                $query = mysqli_query($con, "UPDATE `user_cred` SET `token`='$token',`t_expire`='$date' WHERE `id`='$u_fetch[id]'");
 
                 if($query){
                     echo 1;
@@ -166,6 +182,9 @@ if(isset($_POST['forgot_pass'])){
                 else{
                     echo 'upd_failed';
                 }
+            }
+            else{
+                echo 'mail_failed';
             }
         }
     }

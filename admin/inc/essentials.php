@@ -43,10 +43,10 @@
     function alert($type, $msg){
         $bs_class = ($type == "success") ? "alert-success" : "alert-danger";
         echo <<<alert
-        <div class="alert $bs_class alert-dismissible fade show" role="alert">
-            <strong>$msg</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+            <div class='alert $bs_class alert-dismissible fade show d-flex justify-content-between' role='alert'>
+                <strong class='me-2'>$msg</strong>
+                <button type='button' class='btn-sm p-0 bg-transparent border-0 shadow-none' data-bs-dismiss='alert' aria-label='Close'><i class="bi bi-x-circle"></i></button>
+            </div>
         alert;
     }
     
@@ -141,3 +141,4 @@
             }
         }
     }
+?>

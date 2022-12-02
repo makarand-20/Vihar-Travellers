@@ -258,11 +258,103 @@
         </div>
     </section>
     <!-- End Our Team Section -->
+
+    <!-- Password Reset -->
+    <div class="modal fade" id="recoveryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <form id="recovery-form">
+                   <div class="modal-header d-flex justif-content-between">
+                       <h5>Set up new Password</h5>
+                       <button type="reset" class="btn bg-white text-dark align-middle shadow-none p-0 m-0" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-power"></i></button>
+                   </div>
+                   <div class="modal-body">
+                       <div class="mb-3">
+                           <label class="form-label">New Passoward</label>
+                           <input type="password" name="pass" class="form-control shadow-none" required>
+                           <input type="hidden" name="email">
+                           <input type="hidden" name="token">
+                       </div>
+                       <div class="d-flex align-items-center justify-content-between mb-2">
+                            <button type="submit" class="btn btn-dark shadow-none">Submit</button>  
+                        </div>
+                   </div>
+               </form>
+           </div>
+       </div>
+   </div>
+    <!-- End Password Reset -->
     
     <?php
     include('include/footer.php');
     ?>
 
-</body>
+    <?php
+        if(isset($_GET['account_recovery'])){
+            $data = filteration($_GET);
+            $t_date = date("Y-m-d");
 
+            $query = select("SELECT * FROM `user_cred` WHERE `email`=? AND `token`=? AND `t_expire`=? LIMIT 1", [$data['email'], $data['token'], $t_date],'sss');
+
+            if(mysqli_num_rows($query)==1){
+                echo<<<showModal
+                    <script>
+                        var myModal = document.getElementById('recoveryModal');
+
+                        myModal.querySelector("input[name='email']").value = '$data[email]';
+                        myModal.querySelector("input[name='token']").value = '$data[token]';
+
+                        var modal = bootstrap.Modal.getOrCreateInstance(myModal);
+                        modal.show();
+                    </script>
+                showModal;
+            }
+            else{
+                alert('error','Invalid / Expired Link !');
+            }
+        }
+    ?>
+
+</body>
+    <script>
+        //auto close
+        window.setTimeout(function()
+        {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove(); 
+            });
+        }, 4000);
+
+
+        let recovery_form = document.getElementById('recovery-form');
+        recovery_form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let data = new FormData();
+        
+        data.append('email', recovery_form.elements['email'].value);
+        data.append('token', recovery_form.elements['token'].value);
+        data.append('pass', recovery_form.elements['pass'].value);
+        data.append('recover_user', '');
+
+        var myModal = document.getElementById('recoveryModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/login_register.php", true);
+
+        xhr.onload = function() {
+            if(this.responseText == 'failed'){
+                alert('Account Reset Failed!');
+            }
+            else{
+                alert('Account Recent Successful');
+                recovery_form.reset();
+            }
+        }
+        xhr.send(data);
+    });
+
+    </script>
 </html>

@@ -4862,59 +4862,18 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .alert {
-  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20%;
   padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
+  z-index:9999; 
+  margin: 10px;
   border: 1px solid transparent;
 }
 
 .alert-heading {
   color: inherit;
-}
-
-.alert-link {
-  font-weight: 700;
-}
-
-.alert-dismissible {
-  padding-right: 4rem;
-}
-
-.alert-dismissible .close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 2;
-  padding: 0.75rem 1.25rem;
-  color: inherit;
-}
-
-.alert-primary {
-  color: #6d514f;
-  background-color: #f6ebea;
-  border-color: #f2e3e2;
-}
-
-.alert-primary hr {
-  border-top-color: #ead2d0;
-}
-
-.alert-primary .alert-link {
-  color: #4f3b3a;
-}
-
-.alert-secondary {
-  color: #7b7d85;
-  background-color: #fbfcff;
-  border-color: #fafbff;
-}
-
-.alert-secondary hr {
-  border-top-color: #e1e7ff;
-}
-
-.alert-secondary .alert-link {
-  color: #62646b;
 }
 
 .alert-success {
@@ -4931,34 +4890,6 @@ a.badge-dark:focus, a.badge-dark.focus {
   color: #0b2e13;
 }
 
-.alert-info {
-  color: #0c5460;
-  background-color: #d1ecf1;
-  border-color: #bee5eb;
-}
-
-.alert-info hr {
-  border-top-color: #abdde5;
-}
-
-.alert-info .alert-link {
-  color: #062c33;
-}
-
-.alert-warning {
-  color: #856404;
-  background-color: #fff3cd;
-  border-color: #ffeeba;
-}
-
-.alert-warning hr {
-  border-top-color: #ffe8a1;
-}
-
-.alert-warning .alert-link {
-  color: #533f03;
-}
-
 .alert-danger {
   color: #721c24;
   background-color: #f8d7da;
@@ -4971,34 +4902,6 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .alert-danger .alert-link {
   color: #491217;
-}
-
-.alert-light {
-  color: #858585;
-  background-color: white;
-  border-color: white;
-}
-
-.alert-light hr {
-  border-top-color: #f2f2f2;
-}
-
-.alert-light .alert-link {
-  color: #6c6c6c;
-}
-
-.alert-dark {
-  color: #0f0f0f;
-  background-color: #d2d2d2;
-  border-color: #bfbfbf;
-}
-
-.alert-dark hr {
-  border-top-color: #b2b2b2;
-}
-
-.alert-dark .alert-link {
-  color: black;
 }
 
 @keyframes progress-bar-stripes {

@@ -2,19 +2,32 @@
 require('../admin/inc/db_config.php');
 require('../admin/inc/essentials.php');
 require("../include/sendgrid/sendgrid-php.php");
+date_default_timezone_set("Asia/Kolkata");
 
-function send_mail($uemail, $name, $token){
+function send_mail($uemail, $token, $type){
+
+    if($type = "email_confirmation"){
+        $page = 'email_confirm.php';
+        $subject = 'Account Verification Link';
+        $content = 'Click the link to confirm your email : ';
+    }
+    else{
+        $page = 'index.php';
+        $subject = 'Account Reset Link';
+        $content = 'Reset Your Account';
+    }
+
     $email = new \SendGrid\Mail\Mail(); 
     $email->setFrom(SENDGRID_EMAIL, SENDGRID_TITLE_NAME);
-    $email->setSubject("Account Verification Link");
+    $email->setSubject($subject);
 
-    $email->addTo($uemail, $name);
+    $email->addTo($uemail,);
     
     $email->addContent(
         "text/html",
         "
-            Click to confirm your email : <br>
-            <a href = '".SITE_URL."email_confirm.php?email_confirmation&email=$uemail&token=$token"."'>
+            $content<br>
+            <a href = '".SITE_URL."$page?$type&email=$uemail&token=$token"."'>
                 CLICK ME
             </a>
         "
@@ -63,7 +76,7 @@ if(isset($_POST['register'])){
 
     //send confirmation link to the user
     $token = bin2hex(random_bytes(16));
-    if(!send_mail($data['email'], $data['name'],$token)){
+    if(!send_mail($data['email'],$token, "email_confirmation")){
         echo 'mail_failed';
         exit;
     }
@@ -119,4 +132,43 @@ if(isset($_POST['login'])){
 
 }
 
+if(isset($_POST['forgot_pass'])){
+    $data = filteration($_POST);
+
+    //check user exist
+
+    $u_exist = select("SELECT * FROM `user_cred` WHERE `email`=? LIMIT 1", [$data['email']],'s');
+
+    if(mysqli_num_rows($u_exist)==0){
+        echo 'inv_email'; 
+    }
+    else{
+        $u_fetch = mysqli_fetch_assoc($u_exist);
+
+        if($u_fetch['is_verified']==0){
+            echo 'not_verified';
+        }
+        else if($u_fetch['status']==0){
+            echo 'inactive';
+        }
+        else{
+            $token = bin2hex(random_bytes(16));
+            if(!send_mail($data['email'], $token, 'account_recovery')){
+                echo 'mail_failed';
+            }
+            else{
+                $date = date("Y-m-d");
+                $query = mysqli_query($con, "UPDATE `user_cred` SET `token`='$token',`t_expire`='$date',WHERE `id`='$u_fetch[id]'");
+
+                if($query){
+                    echo 1;
+                }
+                else{
+                    echo 'upd_failed';
+                }
+            }
+        }
+    }
+
+}
 ?>

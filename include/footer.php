@@ -182,4 +182,45 @@ $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
         xhr.send(data);
 
     });
+
+    let forgot_form = document.getElementById('forgot-form');
+    forgot_form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let data = new FormData();
+        
+        data.append('email', forgot_form.elements['email'].value);
+        data.append('forgot_pass', '');
+
+        var myModal = document.getElementById('forgotModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/login_register.php", true);
+
+        xhr.onload = function() {
+            if(this.responseText == 'inv_email'){
+                alert('Invalid Email');
+            }
+            else if(this.responseText == 'not_verified'){
+                alert('Email is not verified yet...');
+            }
+            else if(this.responseText == 'inactive'){
+                alert('Your Account Is Suspended, Please Contact Admin');
+            }
+            else if(this.responseText == 'mail_failed'){
+                alert('Cannot Send email, Server Down!');
+            }
+            else if(this.responseText == 'upd_failed'){
+                alert('Account Recovery Failed!');
+            }
+            else{
+                alert('Success, Link Sent to your mail');
+                forgot_form.reset();
+            }
+        }
+        xhr.send(data);
+
+    });
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2022 at 06:22 PM
+-- Generation Time: Dec 03, 2022 at 07:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -134,9 +134,9 @@ INSERT INTO `facilities` (`sr_no`, `icon`, `name`, `description`) VALUES
 (9, 'IMG_52158.svg', 'Accomodation', 'Comfortable &amp; convenient hotels cherry picked by our hotel management team.'),
 (10, 'IMG_50382.svg', 'Meals', 'Eat to your heart&#039;s content Breakfast, Lunch, Dinner.'),
 (11, 'IMG_79922.svg', 'Money', 'Our research team spends hours curating the best value for money itineraries.'),
-(12, 'IMG_32156.svg', 'Transport', 'Our itineraries include all rail, sea and road transport as part of the itinerary so you can enjoy tension free.'),
 (14, 'IMG_97519.svg', 'Plane', 'maku World tours are inclusive of airfare from many hubs within India unless you pick the joining-leaving option.'),
-(16, 'IMG_93295.svg', 'Flag', 'We have an exclusive team of 350 tour managers specialising in India and World tours, who taking care of our clients.');
+(16, 'IMG_93295.svg', 'Flag', 'We have an exclusive team of 350 tour managers specialising in India and World tours, who taking care of our clients.'),
+(22, 'IMG_55087.svg', 'Transport', 'Our itineraries include all rail, sea and road transport as part of the itinerary so you can enjoy tension free');
 
 -- --------------------------------------------------------
 
@@ -226,11 +226,11 @@ CREATE TABLE `tours` (
 --
 
 INSERT INTO `tours` (`id`, `feature_name`, `package_type`, `speciality_tour`, `days`, `price`, `location`, `description`, `quantity`, `status`, `removed`) VALUES
-(13, 'Kashmir Vibes', 'Customized', 'Honeymoon', 500, 858470, 'Kulu Manali', 'Best Trip', 4, 1, 0),
+(13, 'Kashmir Vibes', 'Customized', 'Honeymoon', 500, 85847, 'Kulu Manali', 'Best Trip', 4, 1, 0),
 (14, 'Goa Rocks', 'Guest', 'Friends', 14, 40000, 'Goa', 'Very Nice Trip!', 2, 1, 0),
-(15, 'Gujarat special', 'Customized', 'Guest', 44, 1, 'Gujarat', 'Enjoy!', 100, 1, 0),
+(15, 'Gujarat special', 'Customized', 'Guest', 44, 15796, 'Gujarat', 'Enjoy!', 10, 1, 0),
 (16, 'Kokan Special', 'Friends', 'Friends', 5, 45000, 'Kokann', 'Habibi, Come to Kokan', 10, 1, 0),
-(17, 'Bahamas op', 'Customized', 'Honeymoon', 12, 2, 'bahamas', 'Love you 3000!', 1, 1, 0),
+(17, 'Bahamas op', 'Customized', 'Honeymoon', 12, 78965, 'bahamas', 'Love you 3000!', 1, 1, 0),
 (18, 'sdf', 'sdfa', 'sdf', 3, 3, 'asdf', 'sdf', 3, 1, 1),
 (19, 'Saloni Patil', 'customzed', 'honeymoon', 12, 1500000, 'Manali', 'sadfasfasegaegf', 2, 1, 1);
 
@@ -253,20 +253,20 @@ CREATE TABLE `tour_features` (
 INSERT INTO `tour_features` (`sr_no`, `tour_id`, `features_id`) VALUES
 (110, 16, 10),
 (111, 16, 16),
-(140, 17, 11),
-(141, 17, 13),
-(142, 13, 10),
-(143, 13, 11),
-(144, 13, 13),
-(145, 13, 16),
 (155, 14, 10),
 (156, 14, 11),
 (157, 14, 13),
 (158, 14, 16),
-(159, 15, 10),
-(160, 15, 11),
-(161, 15, 13),
-(162, 15, 16);
+(167, 17, 11),
+(168, 17, 13),
+(169, 15, 10),
+(170, 15, 11),
+(171, 15, 13),
+(172, 15, 16),
+(173, 13, 10),
+(174, 13, 11),
+(175, 13, 13),
+(176, 13, 16);
 
 -- --------------------------------------------------------
 
@@ -287,7 +287,6 @@ CREATE TABLE `tour_images` (
 
 INSERT INTO `tour_images` (`sr_no`, `tour_id`, `image`, `thumb`) VALUES
 (15, 13, 'IMG_50612.jpg', 0),
-(16, 14, 'IMG_91435.jpg', 0),
 (19, 17, 'IMG_42666.jpg', 1),
 (21, 17, 'IMG_78377.jpg', 0),
 (22, 15, 'IMG_66493.jpg', 0),
@@ -298,15 +297,16 @@ INSERT INTO `tour_images` (`sr_no`, `tour_id`, `image`, `thumb`) VALUES
 (27, 15, 'IMG_38825.jpg', 0),
 (28, 15, 'IMG_21725.jpg', 0),
 (29, 15, 'IMG_46083.jpg', 0),
-(31, 14, 'IMG_52248.jpg', 0),
 (32, 14, 'IMG_66187.jpg', 0),
 (36, 16, 'IMG_51125.jpg', 0),
 (37, 16, 'IMG_80399.jpg', 0),
-(38, 14, 'IMG_31899.jpg', 1),
+(38, 14, 'IMG_31899.jpg', 0),
 (39, 16, 'IMG_31700.jpg', 1),
 (40, 13, 'IMG_17763.jpg', 0),
 (41, 13, 'IMG_37124.jpg', 0),
-(42, 13, 'IMG_94717.jpg', 1);
+(42, 13, 'IMG_94717.jpg', 1),
+(43, 14, 'IMG_18034.jpg', 0),
+(44, 14, 'IMG_81486.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -337,8 +337,6 @@ CREATE TABLE `user_cred` (
 
 INSERT INTO `user_cred` (`id`, `name`, `email`, `phonenum`, `address`, `pincode`, `dob`, `pass`, `profile`, `is_verified`, `token`, `t_expire`, `status`, `datentime`) VALUES
 (15, 'Mahima', 'herkarmahima2003@gmail.com', '9579536421', 'Pune', 413047, '2022-11-28', '$2y$10$J3HcCweeguWtiJpACRjNf.ZjmJhdj9mSZ6FKAy/5chRWq6d6OU9NK', 'IMG_85287.jpeg', 1, '89686c9d5062685403cddbd6852adad2', '2022-12-02', 1, '2022-12-02 07:29:35'),
-(16, 'Saloni', 'saloniwagh2@gmail.com', '9322491834', 'Pune', 413047, '2022-11-28', '$2y$10$1bOyX298sEJO2r0KmDggxeE3eW/aH1NjeUj1cDF6dsyjHVg2aarUe', 'IMG_51475.jpeg', 0, '5d92ae6ea4e8198d08e4279362b6a010', NULL, 1, '2022-12-02 07:36:33'),
-(18, 'Sid', 'sid.block4@gmail.com', '1023045698', 'Pune', 413047, '2022-12-06', '$2y$10$MO8bbmW2iV4yzXeQQ.6jkeWNDWdzPrfuFsETIu5K.RIPMBlFdvObG', 'IMG_72161.jpeg', 1, '6da1954b48cbe953990892a845d3aaf9', '2022-12-02', 1, '2022-12-02 10:15:07'),
 (22, 'Makarand', 'makarand.code@gmail.com', '7666251951', 'Pune', 413304, '2022-12-01', '$2y$10$sc4ZYk2tiC3s0o88c8dkX.oMaViElGk1DzSJB0GM2WzyBWAhoHt5q', 'IMG_61010.jpeg', 1, NULL, NULL, 1, '2022-12-02 11:32:10');
 
 -- --------------------------------------------------------
@@ -362,14 +360,13 @@ CREATE TABLE `user_queries` (
 --
 
 INSERT INTO `user_queries` (`sr_no`, `name`, `email`, `subject`, `message`, `date`, `seen`) VALUES
-(49, 'Makarand', 'makarandkhiste123@gmail.com', 'Debugging', 'on going project', '2022-11-19', 0),
+(49, 'Makarand', 'makarandkhiste123@gmail.com', 'Debugging', 'on going project', '2022-11-19', 1),
 (50, 'Saloni', 'salo@gmail.com', 'Checking', 'Still going on', '2022-11-19', 0),
-(51, 'Siddharth', 'sid@gmail.com', 'Trying', 'Just trying to add it.', '2022-11-19', 0),
-(52, 'Mahima', 'mahi@gamil.com', 'Checkout', 'We are the best!', '2022-11-19', 0),
+(51, 'Siddharth', 'sid@gmail.com', 'Trying', 'Just trying to add it.', '2022-11-19', 1),
+(52, 'Mahima', 'mahi@gamil.com', 'Checkout', 'We are the best!', '2022-11-19', 1),
 (53, 'Arkam', 'arkam@gamil.com', 'ContactUs', 'Contact Us page', '2022-11-19', 0),
 (55, 'You Tube', 'youtube@google.com', 'Admin', 'admin did good', '2022-11-19', 1),
-(56, 'Shop Details', 'shopdetail@gamil.com', 'Enter Subject', 'mobile number 7666251951', '2022-11-19', 0),
-(57, 'Firebase', 'firebase@gmail.com', 'best database', 'best database ever used', '2022-11-19', 1);
+(56, 'Shop Details', 'shopdetail@gamil.com', 'Enter Subject', 'mobile number 7666251951', '2022-11-19', 1);
 
 --
 -- Indexes for dumped tables
@@ -488,7 +485,7 @@ ALTER TABLE `extra_carousel`
 -- AUTO_INCREMENT for table `facilities`
 --
 ALTER TABLE `facilities`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `features`
@@ -518,13 +515,13 @@ ALTER TABLE `tours`
 -- AUTO_INCREMENT for table `tour_features`
 --
 ALTER TABLE `tour_features`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT for table `tour_images`
 --
 ALTER TABLE `tour_images`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `user_cred`

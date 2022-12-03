@@ -216,6 +216,12 @@
                                 $tour_thumb = TOURS_IMG_PATH.$thumb_res['image'];
                             }
 
+                            $book_btn = "<button id='myBtn' disabled class='btn btn-sm bg-success rounded shadow-none'>Book Now</button>";
+
+                            if (!$contact_m['shutdown']) {
+                                $book_btn = "<a href='#' class='btn btn-sm bg-success rounded shadow-none'>Book Now</a>";
+                            }
+
                             //Print Tour Card
 
                             echo<<<data
@@ -249,7 +255,7 @@
                                             <h5 class="mb-4">₹ $tour_data[price]/-</h5>
             
                                             <div class="d-flex justify-content-between mb-2 mx-2">
-                                                <a href="#" class="btn  bg-success rounded shadow-none">Book Now</a>
+                                                $book_btn
                                                 <a href="detail.php?id=$tour_data[id]" class="btn bg-primary rounded shadow-none">More Details</a>
                                             </div>
                                         </div>

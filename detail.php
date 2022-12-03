@@ -44,6 +44,12 @@
 
     $tour_data = mysqli_fetch_assoc($tour_res);
 
+    $book_btn = "<button id='myBtn' disabled class='btn btn-sm bg-success rounded shadow-none'>Book Now</button>";
+
+    if (!$contact_m['shutdown']) {
+        $book_btn = "<a href='#' class='btn btn-primary btn-sm px-3 shadow-none rounded'>Book Now</a>";
+    }
+
     ?>
 
     <!-- Page Header Start -->
@@ -146,10 +152,13 @@
                     <span class='text-dark custom-control-inline me-1 p-0'><?php echo $tour_data['quantity'] ?> bookings remaining</span>
                 </div>
 
-
-                <div class="d-flex align-items-center mb-4 pt-2">
-                    <button class="btn btn-primary btn-sm px-3"><i class="bi bi-bookmark-check mr-1"></i>Book Now</button>
-                </div>
+                <?php
+                    echo<<<book
+                        <div class="d-flex align-items-center mb-4 pt-2">
+                            $book_btn
+                        </div>
+                    book;
+                ?>
             </div>
         </div>
         <div class="row px-xl-5">

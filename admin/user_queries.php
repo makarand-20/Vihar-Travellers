@@ -94,7 +94,7 @@ if (isset($_GET['del'])) {
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Email</th>
                                                         <th scope="col" width="20%">Subject</th>
-                                                        <th scope="col" width="30%">Message</th>
+                                                        <th scope="col" width="20%">Message</th>
                                                         <th scope="col">Date</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
@@ -109,7 +109,7 @@ if (isset($_GET['del'])) {
 
                                                         $seen = '';
                                                         if ($row['seen'] != 1) {
-                                                            $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-success'><i class='bi bi-check2-circle'></i></a>";
+                                                            $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-success me-2'><i class='bi bi-check2-circle'></i></a>";
                                                         }
                                                         $seen .= "<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger'><i class='bi bi-trash3'></i></a>";
 

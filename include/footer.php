@@ -26,7 +26,7 @@ $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
                     <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-dark mb-2" href="index.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-dark mb-2" href="shop.php"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                        <a class="text-dark mb-2" href="tour.php"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
                         <a class="text-dark mb-2" href="detail.php"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
                         <a class="text-dark mb-2" href="checkout.php"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
                         <a class="text-dark" href="contact.php"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
@@ -36,7 +36,7 @@ $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
                     <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-dark mb-2 pn1" href="index.php"><i class="bi bi-linkedin mr-2"></i>LinkedIn</a>
-                        <a class="text-dark mb-2 pn1" href="shop.php"><i class="bi bi-github mr-2"></i>Instagram</a>
+                        <a class="text-dark mb-2 pn1" href="tour.php"><i class="bi bi-github mr-2"></i>Instagram</a>
                         <a class="text-dark mb-2 pn1" href="detail.php"><i class="bi bi-twitter mr-2"></i>Twitter</a>
                         <a class="text-dark mb-2 pn1" href="checkout.php"><i class="bi bi-telegram mr-2"></i>Checkout</a>
                         <a class="text-dark pn1" href="contact.php"><i class="bi bi-instagram mr-2"></i>Contact Us</a>

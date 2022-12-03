@@ -111,7 +111,7 @@
          <span>Dashboard</span>
        </a>
        <a class="nav-link" href="users-profile.php">
-         <i class="bi bi-person"></i>
+         <i class="bi bi-person-fill"></i>
          <span>Profile</span>
        </a>
        <a class="nav-link" href="tours.php">
@@ -126,13 +126,13 @@
          <i class="bi bi-list-task"></i>
          <span>Features & Facilities</span>
        </a>
-       <a class="nav-link" href="user_queries.php">
-         <i class="bi bi-question-lg"></i>
-         <span>User Queries</span>
-       </a>
        <a class="nav-link" href="extra_carousel.php">
          <i class="bi bi-images"></i>
          <span>Extra Carousel</span>
+       </a>
+       <a class="nav-link" href="user_queries.php">
+         <i class="bi bi-question-lg"></i>
+         <span>User Queries</span>
        </a>
        <a class="nav-link" href="setting.php">
          <i class="bi bi-gear"></i>

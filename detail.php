@@ -32,14 +32,14 @@
 
     <?php
     if (!isset($_GET['id'])) {
-        redirect('shop.php');
+        redirect('tour.php');
     }
 
     $data = filteration($_GET);
     $tour_res = select("SELECT * FROM `tours` WHERE `id`=? AND `status`=? AND `removed`=?", [$data['id'], 1, 0], 'iii');
 
     if (mysqli_num_rows($tour_res) == 0) {
-        redirect('shop.php');
+        redirect('tour.php');
     }
 
     $tour_data = mysqli_fetch_assoc($tour_res);

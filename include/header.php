@@ -14,33 +14,14 @@
     $values = [1];
     $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
 
-
-
+    if($contact_m['shutdown']){
+        echo<<<alertbar
+            <div class='bg-warning text-center text-dark p-2 fw-bold'>
+                Bookings are temporary closed, Please visit after some time.
+            </div>
+        alertbar;
+    }
     ?>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-   <!-- Topbar Start -->
-   <div class="container-fluid">
-       <div class="row align-items-center py-3 px-xl-5">
-           <div class="col-lg-3 d-none d-lg-block">
-               <a href="" class="text-decoration-none">
-                   <h2 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">M</span><?php echo $contact_m['site_title'] ?></h2>
-               </a>
-           </div>
-           <div class="col-lg-6 ">
-               <form action="">
-                   <div class="input-group px-3">
-                       <input type="text" class="form-control" placeholder="Search for products">
-                       <div class="input-group-append">
-                           <span class="input-group-text border bg-transparent text-primary">
-                               <i class="fa fa-search"></i>
-                           </span>
-                       </div>
-                   </div>
-               </form>
-           </div>
-       </div>
-   </div>
-   <!-- Topbar End -->
 
    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-5 shadow-sm border-top">
        <a href="" class="text-decoration-none d-block d-lg-none">
@@ -52,7 +33,7 @@
        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
            <div class="navbar-nav mr-auto py-0">
                <a href="index.php" class="nav-item nav-link">Home</a>
-               <a href="shop.php" class="nav-item nav-link">Tours</a>
+               <a href="tour.php" class="nav-item nav-link">Tours</a>
                <a href="checkout.php" class="nav-item nav-link">Checkout</a>
                <a href="contact.php" class="nav-item nav-link">Contact</a>
                <a href="admin/index.php" class="nav-item nav-link">Admin</a>

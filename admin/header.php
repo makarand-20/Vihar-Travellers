@@ -118,6 +118,10 @@
          <i class="bi bi-airplane-engines"></i>
          <span>Tours</span>
        </a>
+       <a class="nav-link" href="users.php">
+         <i class="bi bi-people-fill"></i>
+         <span>Users</span>
+       </a>
        <a class="nav-link" href="carousel.php">
          <i class="bi bi-image"></i>
          <span>Carousel</span>

@@ -212,7 +212,7 @@
                         pay_info.innerText = "Tour is not available for this date!";
                     }
                     else{
-                        pay_info.innerHTML = "No. of Days: "+data.days+"<br>Total Amount to Pay: ₹"+data.payment;
+                        pay_info.innerHTML = "No. of Days :- "+data.days+"<br>Total Amount to Pay :- ₹ "+data.payment;
                         pay_info.classList.replace('text-danger','text-dark');
                         booking_form.elements['pay_now'].removeAttribute('disable');
                     }

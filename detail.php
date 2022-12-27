@@ -74,7 +74,7 @@
         <div class="row px-xl-5">
 
             <!-- Carousel Start -->
-            <div class="col-lg-5 pb-5">
+            <div class="col-lg-6 pb-5">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
                         <?php
@@ -111,7 +111,7 @@
             </div>
             <!-- End of Carousel -->
 
-            <div class="col-lg-7 pb-5">
+            <div class="col-lg-6 pb-5">
                 <h3 class="font-weight-semi-bold"><?php echo $tour_data['feature_name'] ?></h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">

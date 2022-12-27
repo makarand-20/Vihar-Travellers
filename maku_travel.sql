@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2022 at 07:49 PM
+-- Generation Time: Dec 27, 2022 at 07:04 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -228,7 +228,7 @@ CREATE TABLE `tours` (
 INSERT INTO `tours` (`id`, `feature_name`, `package_type`, `speciality_tour`, `days`, `price`, `location`, `description`, `quantity`, `status`, `removed`) VALUES
 (13, 'Kashmir Vibes', 'Customized', 'Honeymoon', 500, 85847, 'Kulu Manali', 'Best Trip', 4, 1, 0),
 (14, 'Goa Rocks', 'Guest', 'Friends', 14, 40000, 'Goa', 'Very Nice Trip!', 2, 1, 0),
-(15, 'Gujarat special', 'Customized', 'Guest', 44, 15796, 'Gujarat', 'Enjoy!', 10, 1, 0),
+(15, 'Gujarat special', 'Customized', 'Guest', 44, 15796, 'Gujarat', 'Enjoy!', 10, 0, 0),
 (16, 'Kokan Special', 'Friends', 'Friends', 5, 45000, 'Kokann', 'Habibi, Come to Kokan', 10, 1, 0),
 (17, 'Bahamas op', 'Customized', 'Honeymoon', 12, 78965, 'bahamas', 'Love you 3000!', 1, 1, 0),
 (18, 'sdf', 'sdfa', 'sdf', 3, 3, 'asdf', 'sdf', 3, 1, 1),
@@ -336,8 +336,10 @@ CREATE TABLE `user_cred` (
 --
 
 INSERT INTO `user_cred` (`id`, `name`, `email`, `phonenum`, `address`, `pincode`, `dob`, `pass`, `profile`, `is_verified`, `token`, `t_expire`, `status`, `datentime`) VALUES
-(15, 'Mahima', 'herkarmahima2003@gmail.com', '9579536421', 'Pune', 413047, '2022-11-28', '$2y$10$J3HcCweeguWtiJpACRjNf.ZjmJhdj9mSZ6FKAy/5chRWq6d6OU9NK', 'IMG_85287.jpeg', 1, '89686c9d5062685403cddbd6852adad2', '2022-12-02', 1, '2022-12-02 07:29:35'),
-(22, 'Makarand', 'makarand.code@gmail.com', '7666251951', 'Pune', 413304, '2022-12-01', '$2y$10$sc4ZYk2tiC3s0o88c8dkX.oMaViElGk1DzSJB0GM2WzyBWAhoHt5q', 'IMG_61010.jpeg', 1, NULL, NULL, 1, '2022-12-02 11:32:10');
+(22, 'Makarand', 'makarand.code@gmail.com', '7666251951', 'Pune', 413304, '2022-12-01', '$2y$10$sc4ZYk2tiC3s0o88c8dkX.oMaViElGk1DzSJB0GM2WzyBWAhoHt5q', 'IMG_61010.jpeg', 1, NULL, NULL, 1, '2022-12-02 11:32:10'),
+(23, 'Mahima', 'herkarmahima2003@gmail.com', '9579536421', 'Mumbai', 413304, '2022-12-05', '$2y$10$KDo3gFCT4lp3LxMiBawhq.4W8GVds5IF/IhWtXajHDdt.szUzLODm', 'IMG_65563.jpeg', 1, '1c994d99e0b8e3c6419f3ecbe5556eb3', NULL, 1, '2022-12-27 02:12:00'),
+(24, 'Siddharth', 'sid.block4@gmail.com', '7894561230', 'Dhule', 413304, '2022-12-13', '$2y$10$iULhqIjRFabvmR1vdgJcOuSDjWrTsivkWFwUEcmhhQO5jJellQotK', 'IMG_92871.jpeg', 0, '1f50b1d14ab83d1d0ed372a956194f53', NULL, 1, '2022-12-27 11:32:16'),
+(25, 'Saloni', 'saloniwagh2@gmail.com', '7845963210', 'Malegaon', 413325, '2022-12-12', '$2y$10$FL1.KT.dSLF8ltF9Z0wFGuK0h9zB0dv0bhDRwEWJdrTivyb1S8CTK', 'IMG_86404.jpeg', 0, '2db99003faffbf28e99f7db91ecd3245', NULL, 1, '2022-12-27 11:32:48');
 
 -- --------------------------------------------------------
 
@@ -527,7 +529,7 @@ ALTER TABLE `tour_images`
 -- AUTO_INCREMENT for table `user_cred`
 --
 ALTER TABLE `user_cred`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user_queries`

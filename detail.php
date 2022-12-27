@@ -47,9 +47,12 @@
     $book_btn = "<button id='myBtn' disabled class='btn btn-sm bg-success rounded shadow-none'>Book Now</button>";
 
     if (!$contact_m['shutdown']) {
-        $book_btn = "<a href='#' class='btn btn-primary btn-sm px-3 shadow-none rounded'>Book Now</a>";
+        $login = 0;
+        if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+            $login = 1;
+        }
+        $book_btn = "<button onclick='checkLoginToBook($login, $tour_data[id])' class='btn btn-primary btn-sm px-3 shadow-none rounded'>Book Now</button>";
     }
-
     ?>
 
     <!-- Page Header Start -->
@@ -122,29 +125,28 @@
                 </div>
                 <h3 class="font-weight-semi-bold mb-4">₹<?php echo $tour_data['price'] ?></h3>
                 <p class="mb-4"><?php echo $tour_data['description'] ?></p>
-                
+
                 <?php
-                    $fea_q = mysqli_query($con, "SELECT f.name FROM `features` f 
+                $fea_q = mysqli_query($con, "SELECT f.name FROM `features` f 
                     INNER JOIN `tour_features` tfea ON f.sr_no = tfea.features_id 
                     WHERE tfea.tour_id = '$tour_data[id]'");
 
-                    //getting features data
-                    $features_data = "";    
-                    while($fea_row = mysqli_fetch_assoc($fea_q))
-                    {
-                        $features_data .="<span class='text-dark custom-control-inline me-1 p-0'>$fea_row[name]</span>";
-                    }
+                //getting features data
+                $features_data = "";
+                while ($fea_row = mysqli_fetch_assoc($fea_q)) {
+                    $features_data .= "<span class='text-dark custom-control-inline me-1 p-0'>$fea_row[name]</span>";
+                }
 
-                    echo<<<features
+                echo <<<features
                         <div class="d-flex">
                             <p class="text-dark"><b>Features :</b></p>&nbsp&nbsp
                             $features_data
                         </div>
                     features;
 
-                
+
                 ?>
-                
+
                 <div class="d-flex mb-4">
                     <p class="text-dark font-weight-medium mb-0 mr-3"><b>Status :</b></p>
                     <span class='text-dark custom-control-inline me-1 p-0'> 📍 <?php echo $tour_data['location'] ?></span>
@@ -153,7 +155,7 @@
                 </div>
 
                 <?php
-                    echo<<<book
+                echo <<<book
                         <div class="d-flex align-items-center mb-4 pt-2">
                             $book_btn
                         </div>

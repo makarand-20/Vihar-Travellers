@@ -176,7 +176,13 @@ $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
                 alert('Invalid Password!');
             }
             else{
-                window.location = window.location.pathname;
+                let fileurl = window.location.href.split('/').pop().split('?').shift();
+                if(fileurl == 'detail.php'){
+                    window.location = window.location.href;
+                }
+                else{
+                    window.location = window.location.pathname;
+                }
             }
         }
         xhr.send(data);
@@ -223,4 +229,13 @@ $contact_m = mysqli_fetch_assoc(select($contact_m, $values, 'i'));
         xhr.send(data);
 
     });
+
+    function checkLoginToBook(status, tour_id){
+        if(status){
+            window.location.href='confirm_booking.php?id='+tour_id;
+        }
+        else{
+            alert('Please Login to book a room');
+        }
+    }
 </script>

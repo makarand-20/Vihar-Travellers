@@ -219,7 +219,11 @@
                             $book_btn = "<button id='myBtn' disabled class='btn btn-sm bg-success rounded shadow-none'>Book Now</button>";
 
                             if (!$contact_m['shutdown']) {
-                                $book_btn = "<a href='#' class='btn btn-sm bg-success rounded shadow-none'>Book Now</a>";
+                                $login = 0;
+                                if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+                                    $login = 1;
+                                }
+                                $book_btn = "<button onclick='checkLoginToBook($login, $tour_data[id])' class='btn btn-sm bg-success rounded shadow-none'>Book Now</button>";
                             }
 
                             //Print Tour Card

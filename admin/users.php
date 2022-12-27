@@ -41,7 +41,7 @@ adminLogin();
                                 <div class="card-body">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <h5 class="card-title">Tours</h5>
-                                        <!-- <input type="text" oninput="search_user(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Type to search"> -->
+                                        <input type="text" oninput="search_user(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Type to search">
                                     </div>
 
                                     <!-- Table -->

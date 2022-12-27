@@ -37,7 +37,7 @@ if (isset($_POST['get_users'])) {
           <img src='$path$row[profile]' width='55px'>
           <br>
           </img>
-          $row[name]
+          <b>$row[name]</b>
         </td>
         <td>$row[email]</td>
         <td>$row[phonenum]</td>
@@ -77,55 +77,57 @@ if (isset($_POST['remove_user'])) {
   }
 }
 
-// if (isset($_POST['search_user'])) {
-//   $frm_data = filteration($_POST);
-//   $query = "SELECT * FROM 'user_cred' WHERE 'name' LIKE ?";
+if (isset($_POST['search_user'])) {
 
-//   $res = select($query,["%$frm_data[name]%"],'s');
-//   $i = 1;
-//   $path = USERS_IMG_PATH;
+  $frm_data = filteration($_POST);
+  
+  $query = "SELECT * FROM user_cred WHERE 'name' LIKE ?";
 
-//   $data = ""; 
+  $res = select($query, ["%$frm_data[name]%"], 's');
+  $i = 1;
+  $path = USERS_IMG_PATH;
 
-//   while ($row = mysqli_fetch_assoc($res)) {
+  $data = ""; 
 
-//     $del_btn = "<button type='button' onclick='remove_user($row[id])' class='btn btn-danger btn-sm'>
-//       <i class='bi bi-trash'></i>
-//     </button>";
+  while ($row = mysqli_fetch_assoc($res)) {
 
-//     $verified = "<span class='badge bg-danger'><i class='bi bi-x-lg'></i></span>";
-//     if ($row['is_verified']) {
-//       $verified = "<span class='badge bg-success'><i class='bi bi-check-lg'></i></span>";
-//       $del_btn = "";
-//     }
+    $del_btn = "<button type='button' onclick='remove_user($row[id])' class='btn btn-danger btn-sm'>
+      <i class='bi bi-trash'></i>
+    </button>";
 
-//     $status = "<button onclick='toggle_status($row[id],0)' class='btn btn-primary btn-sm shadow-none'>Active</button>";
-//     if (!$row['status']) {
-//       $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-warning btn-sm shadow-none'>Inactive</button>";
-//     }
+    $verified = "<span class='badge bg-danger'><i class='bi bi-x-lg'></i></span>";
+    if ($row['is_verified']) {
+      $verified = "<span class='badge bg-success'><i class='bi bi-check-lg'></i></span>";
+      $del_btn = "";
+    }
 
-//     $date = date("d-m-Y", strtotime($row['datentime']));
+    $status = "<button onclick='toggle_status($row[id],0)' class='btn btn-primary btn-sm shadow-none'>Active</button>";
+    if (!$row['status']) {
+      $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-warning btn-sm shadow-none'>Inactive</button>";
+    }
 
-//     $data .= "
-//       <tr>
-//         <td>$i</td>
-//         <td>
-//           <img src='$path$row[profile]' width='55px'>
-//           <br>
-//           </img>
-//           $row[name]
-//         </td>
-//         <td>$row[email]</td>
-//         <td>$row[phonenum]</td>
-//         <td>$row[address]</td>
-//         <td>$row[dob]</td>
-//         <td>$date</td>
-//         <td>$verified</td>
-//         <td>$status</td>
-//         <td>$del_btn</td>
-//       </tr>
-//     ";
-//     $i++;
-//   }
-//   echo $data;
-// }
+    $date = date("d-m-Y", strtotime($row['datentime']));
+
+    $data .= "
+      <tr>
+        <td>$i</td>
+        <td>
+          <img src='$path$row[profile]' width='55px'>
+          <br>
+          </img>
+          $row[name]
+        </td>
+        <td>$row[email]</td>
+        <td>$row[phonenum]</td>
+        <td>$row[address]</td>
+        <td>$row[dob]</td>
+        <td>$date</td>
+        <td>$verified</td>
+        <td>$status</td>
+        <td>$del_btn</td>
+      </tr>
+    ";
+    $i++;
+  }
+  echo $data;
+}

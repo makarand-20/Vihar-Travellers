@@ -47,16 +47,16 @@ function remove_user(user_id) {
     }
 }
 
-// function search_user(username){
-//     let xhr = new XMLHttpRequest();
-//     xhr.open("POST", "ajax/users.php", true);
-//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+function search_user(username){
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "ajax/users.php", true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-//     xhr.onload = function () {
-//         document.getElementById('users-data').innerHTML = this.responseText;
-//     }
-//     xhr.send('search_user&name='+username);
-// }
+    xhr.onload = function () {
+        document.getElementById('users-data').innerHTML = this.responseText;
+    }
+    xhr.send('search_user&name='+username);
+}
 
 window.onload = function () {
     get_users();

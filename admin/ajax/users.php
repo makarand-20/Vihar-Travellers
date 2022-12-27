@@ -81,7 +81,7 @@ if (isset($_POST['search_user'])) {
 
   $frm_data = filteration($_POST);
   
-  $query = "SELECT * FROM user_cred WHERE 'name' LIKE ?";
+  $query = "SELECT * FROM user_cred WHERE name LIKE ?";
 
   $res = select($query, ["%$frm_data[name]%"], 's');
   $i = 1;

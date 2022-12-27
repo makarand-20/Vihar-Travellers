@@ -38,10 +38,9 @@
     */
 
 
-    if (!isset($_GET['id']) || $contact_m['shutdown']==true) {
+    if (!isset($_GET['id']) || $contact_m['shutdown'] == true) {
         redirect('tour.php');
-    }
-    else if(!isset($_SESSION['login']) && $_SESSION['login'] == true){
+    } else if (!isset($_SESSION['login']) && $_SESSION['login'] == true) {
         redirect('tour.php');
     }
 
@@ -63,7 +62,7 @@
         "available" => false,
     ];
 
-    $user_res = select("SELECT * FROM `user_cred` WHERE `id`=? LIMIT 1", [$_SESSION['uId']],'i');
+    $user_res = select("SELECT * FROM `user_cred` WHERE `id`=? LIMIT 1", [$_SESSION['uId']], 'i');
     $user_data = mysqli_fetch_assoc($user_res);
 
 
@@ -100,88 +99,74 @@
                 <?php
                 //getting thumbneail data
 
-                $tour_thumb = TOURS_IMG_PATH."thumbnail.jpg";
+                $tour_thumb = TOURS_IMG_PATH . "thumbnail.jpg";
                 $thumb_q = mysqli_query($con, "SELECT * FROM `tour_images` 
                     WHERE `tour_id`='$tour_data[id]' 
                     AND `thumb`='1'");
 
                 if (mysqli_num_rows($thumb_q) > 0) {
                     $thumb_res = mysqli_fetch_assoc($thumb_q);
-                    $tour_thumb = TOURS_IMG_PATH.$thumb_res['image'];
+                    $tour_thumb = TOURS_IMG_PATH . $thumb_res['image'];
                 }
 
-                echo<<<data
+                echo <<<data
                     <div class="card p-3 shadow rounded">
                         <img src="$tour_thumb" class="card-img-top rounded-top">
+                        <h4>$tour_data[feature_name]</h4>
+                        <h4>₹$tour_data[price] per Night</h4>
                     </div>
                 data;
                 ?>
             </div>
 
             <div class="col-lg-6 pb-5">
-                <h3 class="font-weight-semi-bold"><?php echo $tour_data['feature_name'] ?></h3>
-                <div class="d-flex mb-3">
-                    <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
-                    </div>
-                    <small class="pt-1">(50 Reviews)</small>
-                </div>
-                <h3 class="font-weight-semi-bold mb-4">₹<?php echo $tour_data['price'] ?></h3>
-                <p class="mb-4"><?php echo $tour_data['description'] ?></p>
-
-                <?php
-                $fea_q = mysqli_query($con, "SELECT f.name FROM `features` f 
-                    INNER JOIN `tour_features` tfea ON f.sr_no = tfea.features_id 
-                    WHERE tfea.tour_id = '$tour_data[id]'");
-
-                //getting features data
-                $features_data = "";
-                while ($fea_row = mysqli_fetch_assoc($fea_q)) {
-                    $features_data .= "<span class='text-dark custom-control-inline me-1 p-0'>$fea_row[name]</span>";
-                }
-
-                echo <<<features
-                        <div class="d-flex">
-                            <p class="text-dark"><b>Features :</b></p>&nbsp&nbsp
-                            $features_data
-                        </div>
-                    features;
-                ?>
-
-                <div class="d-flex mb-4">
-                    <p class="text-dark font-weight-medium mb-0 mr-3"><b>Status :</b></p>
-                    <span class='text-dark custom-control-inline me-1 p-0'> 📍 <?php echo $tour_data['location'] ?></span>
-                    <span class='text-dark custom-control-inline me-1 p-0'><?php echo $tour_data['days'] ?> days</span>
-                    <span class='text-dark custom-control-inline me-1 p-0'><?php echo $tour_data['quantity'] ?> bookings remaining</span>
-                </div>
-
-                <?php
-                echo <<<book
-                        <div class="d-flex align-items-center mb-4 pt-2">
-                            $book_btn
-                        </div>
-                    book;
-                ?>
-            </div>
-
-        </div>
-
-        <div class="row px-xl-5">
-            <div class="col-lg-6 pb-5">
                 <div class="card p-3 shadow rounded">
-                    
+                    <form action="" id="booking_form">
+                        <h4 class="font-weight-semi-bold my-3">Booking Details</h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Name</label>
+                                <input type="name" type="text" value="<?php echo $user_data['name'] ?>" class="form-control shadow-none mb-2" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone No.</label>
+                                <input name="name" type="number" value="<?php echo $user_data['phonenum'] ?>" class="form-control shadow-none mb-2" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Address</label>
+                                <input name="address" type="text" value="<?php echo $user_data['address'] ?>" class="form-control shadow-none mb-2" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Check In</label>
+                                <input name="checkin" type="date" class="form-control shadow-none mb-2" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label">Check Out</label>
+                                <input name="checkout" type="date" class="form-control shadow-none mb-2" required>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <div class="spinner-border text-primary mb-3 d-none" id="info_loader" role="status">
+                                    <span class="visually-hidden"></span>
+                                </div>
+
+                                <h6 class="mb-3 text-danger" id="pay_info">Provide Check-in & Check-out date !</h6>
+
+                                <button name="pay_now" class="btn w-100 text-white bg-success rounded shadow-none mb-2" disabled>Pay Now</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-    <!-- Shop Detail End -->
-    <?php
-    include('include/footer.php');
-    ?>
+        </div>
+
+        
+
+        <!-- Shop Detail End -->
+        <?php
+        include('include/footer.php');
+        ?>
 </body>
 
 </html>

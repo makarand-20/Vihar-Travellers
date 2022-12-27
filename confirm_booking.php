@@ -110,11 +110,15 @@
                 }
 
                 echo <<<data
-                    <div class="card p-3 shadow rounded">
+                    <div class="card p-3 shadow rounded mb-1">
                         <img src="$tour_thumb" class="card-img-top rounded-top">
-                        <h4>$tour_data[feature_name]</h4>
-                        <h4>₹$tour_data[price] per Night</h4>
                     </div>
+                    <center>
+                    <div class="card px-3 py-2 shadow rounded">
+                        <h5>$tour_data[feature_name]</h5>
+                        <h6>₹$tour_data[price]</h6>
+                    </div>
+                    </center>
                 data;
                 ?>
             </div>
@@ -138,11 +142,11 @@
                             </div>
                             <div class="col-md-6 mb-4">
                                 <label class="form-label">Check In</label>
-                                <input name="checkin" type="date" class="form-control shadow-none mb-2" required>
+                                <input name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none mb-2" required>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <label class="form-label">Check Out</label>
-                                <input name="checkout" type="date" class="form-control shadow-none mb-2" required>
+                                <input name="checkout" onchange="check_availability()" type="date" class="form-control shadow-none mb-2" required>
                             </div>
                             <div class="col-md-12 mb-2">
                                 <div class="spinner-border text-primary mb-3 d-none" id="info_loader" role="status">
@@ -159,14 +163,48 @@
             </div>
         </div>
 
-        </div>
+    </div>
 
-        
 
-        <!-- Shop Detail End -->
-        <?php
-        include('include/footer.php');
-        ?>
+
+    <!-- Shop Detail End -->
+    <?php
+    include('include/footer.php');
+    ?>
+    <script>
+        let booking_form = document.getElementById('booking_form');
+        let info_loader = document.getElementById('info_loader');
+        let pay_info = document.getElementById('pay_info');
+
+        function check_availability() {
+            let checkin_val = booking_form.elements['checkin'].value;
+            let checkout_val = booking_form.elements['checkout'].value;
+
+            booking_form.elements['pay_now'].setAttribute('disable', true);
+
+            if (checkin_val != '' && checkout_val != '') {
+
+                pay_info.classList.add('d-none');
+                
+                let data = new FormData();
+
+                data.append('check_availability', '');
+                data.append('check_in', checkin_val);
+                data.append('check_out', checkout_val);
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "ajax/confirm_booking.php", true);
+
+                xhr.onload = function() {
+                    let data = JSON.parse(this.responseText);
+
+                }
+                xhr.send(data);
+
+
+            }
+        }
+    </script>
 </body>
 
 </html>

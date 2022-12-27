@@ -185,6 +185,8 @@
             if (checkin_val != '' && checkout_val != '') {
 
                 pay_info.classList.add('d-none');
+                pay_info.classList.replace('text-dark','text-danger');
+                info_loader.classList.remove('d-none');
                 
                 let data = new FormData();
 
@@ -197,11 +199,27 @@
 
                 xhr.onload = function() {
                     let data = JSON.parse(this.responseText);
-
+                    if(data.status == 'check_in_out_equal'){
+                        pay_info.innerText = "You can not check-out on the same day!";
+                    }
+                    else if(data.status == 'check_out_earlier'){
+                        pay_info.innerText = "Check-out date is earlier than check-in date!";
+                    }
+                    else if(data.status == 'check_in_earlier'){
+                        pay_info.innerText = "Check-in date is earlier than today's date!";
+                    }
+                    else if(data.status == 'unavailable'){
+                        pay_info.innerText = "Tour is not available for this date!";
+                    }
+                    else{
+                        pay_info.innerHTML = "No. of Days: "+data.days+"<br>Total Amount to Pay: ₹"+data.payment;
+                        pay_info.classList.replace('text-danger','text-dark');
+                        booking_form.elements['pay_now'].removeAttribute('disable');
+                    }
+                    pay_info.classList.remove('d-none');
+                    info_loader.classList.add('d-none');
                 }
                 xhr.send(data);
-
-
             }
         }
     </script>

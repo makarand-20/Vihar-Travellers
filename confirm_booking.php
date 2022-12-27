@@ -110,13 +110,18 @@
                 }
 
                 echo <<<data
+
+                    <center>
+                    <div class="card pt-2 shadow rounded mb-1">
+                    <h4>$tour_data[feature_name]</h4>
+                    </div>
+                    </center>
                     <div class="card p-3 shadow rounded mb-1">
                         <img src="$tour_thumb" class="card-img-top rounded-top">
                     </div>
                     <center>
-                    <div class="card px-3 py-2 shadow rounded">
-                        <h5>$tour_data[feature_name]</h5>
-                        <h6>₹$tour_data[price]</h6>
+                    <div class="card pt-2 shadow rounded mb-1">
+                    <h4>₹ $tour_data[price]</h4>
                     </div>
                     </center>
                 data;
@@ -162,7 +167,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 
@@ -185,9 +189,9 @@
             if (checkin_val != '' && checkout_val != '') {
 
                 pay_info.classList.add('d-none');
-                pay_info.classList.replace('text-dark','text-danger');
+                pay_info.classList.replace('text-dark', 'text-danger');
                 info_loader.classList.remove('d-none');
-                
+
                 let data = new FormData();
 
                 data.append('check_availability', '');
@@ -199,21 +203,17 @@
 
                 xhr.onload = function() {
                     let data = JSON.parse(this.responseText);
-                    if(data.status == 'check_in_out_equal'){
+                    if (data.status == 'check_in_out_equal') {
                         pay_info.innerText = "You can not check-out on the same day!";
-                    }
-                    else if(data.status == 'check_out_earlier'){
+                    } else if (data.status == 'check_out_earlier') {
                         pay_info.innerText = "Check-out date is earlier than check-in date!";
-                    }
-                    else if(data.status == 'check_in_earlier'){
+                    } else if (data.status == 'check_in_earlier') {
                         pay_info.innerText = "Check-in date is earlier than today's date!";
-                    }
-                    else if(data.status == 'unavailable'){
+                    } else if (data.status == 'unavailable') {
                         pay_info.innerText = "Tour is not available for this date!";
-                    }
-                    else{
-                        pay_info.innerHTML = "No. of Days :- "+data.days+"<br>Total Amount to Pay :- ₹ "+data.payment;
-                        pay_info.classList.replace('text-danger','text-dark');
+                    } else {
+                        pay_info.innerHTML = "No. of Days :- " + data.days + "<br>Total Amount to Pay :- ₹ " + data.payment;
+                        pay_info.classList.replace('text-danger', 'text-dark');
                         booking_form.elements['pay_now'].removeAttribute('disable');
                     }
                     pay_info.classList.remove('d-none');
@@ -224,5 +224,4 @@
         }
     </script>
 </body>
-
 </html>

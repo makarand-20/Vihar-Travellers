@@ -3,7 +3,7 @@
 Welcome to "Vihar Travellers"
 <br>
 
-### *Users Side View Of Site*
+## *Users Side View Of Site*
 
 
 
@@ -23,7 +23,7 @@ Welcome to "Vihar Travellers"
 
 <br>
 
-### *Admin Side View Of Site*
+## *Admin Side View Of Site*
 <br>
 <br>
 

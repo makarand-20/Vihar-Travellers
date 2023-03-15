@@ -1,8 +1,9 @@
 # Traveling_Hub
 
 Welcome to "Vihar Travellers"
+<br>
 
-********************* Users Side View Of site ********************* 
+### *Users Side View Of Site*
 
 
 
@@ -20,11 +21,11 @@ Welcome to "Vihar Travellers"
 
 ![Screenshot (125)](https://user-images.githubusercontent.com/111168325/224553950-d2be3b1a-7bdb-4a36-8c76-3f9d920e40ea.png)
 
+<br>
 
-
-*********************  Admin Side View Of Site ********************* 
-
-
+### *Admin Side View Of Site*
+<br>
+<br>
 
 ![Screenshot (126)](https://user-images.githubusercontent.com/111168325/224553987-3057a72e-0215-4372-a76e-c1ae1814bde4.png)
 
